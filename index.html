@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAKO - Aplikasi & Bimbingan Program</title>
+    <!-- Font Awesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* --- ANIMATION ON SCROLL SYSTEM --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            background-color: #ffffff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            border-radius: 2px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            margin-top: 70px;
+        }
+
+        /* DIV 1: SLIDER */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .slider {
+            display: flex;
+            width: 500%;
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .slide {
+            width: 20%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 20%;
+            left: 10%;
+            color: #fff;
+            max-width: 600px;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .slide-caption h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        /* DIV 2: ABOUT US */
+        .about-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .about-grid {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .about-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 280px;
+            max-width: 500px;
+        }
+
+        .about-card i {
+            font-size: 40px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        /* DIV 3: SERVICE (11 CARDS) */
+        .service-section {
+            background-color: #f9f9f9;
+            padding: 60px 0;
+        }
+
+        .service-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .service-container h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .grid-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .card-price {
+            margin-bottom: 15px;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #95a5a6;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .price-new {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .btn-order {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-order:hover {
+            background-color: #27ae60;
+        }
+
+        /* DIV 4: REVIEWS (MARQUEE EFFECT) */
+        .reviews-section {
+            padding: 60px 0;
+            background: #2c3e50;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .reviews-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: inline-flex;
+            gap: 20px;
+            animation: marquee 30s linear infinite;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            white-space: normal;
+        }
+
+        .review-card p {
+            font-style: italic;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .review-card span {
+            font-weight: bold;
+            font-size: 12px;
+            color: #3498db;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #1a252f;
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* --- POPUP / MODAL ORDER --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-rule-trigger {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 12px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+
+        .checkbox-group input {
+            margin-top: 3px;
+        }
+
+        .btn-checkout {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* SUB-MODAL ATURAN */
+        .rule-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2500;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .rule-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            text-align: justify;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .btn-close-rule {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* --- FLOATING CHAT HELP --- */
+        .floating-help {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1500;
+        }
+
+        .chat-logo {
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .help-cards-container {
+            display: none;
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 280px;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .help-header {
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .help-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.2s;
+            border: 1px solid #eee;
+        }
+
+        .help-card:hover {
+            transform: scale(1.03);
+        }
+
+        .help-card i {
+            font-size: 24px;
+            color: #25d366;
+        }
+
+        .help-card-text h4 {
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .help-card-text p {
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* --- RESPONSIVE DESIGN (SMARTPHONE) --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px; left: 0;
+                width: 100%;
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                gap: 15px;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .slider-container {
+                height: 300px;
+            }
+
+            .slide-caption h2 {
+                font-size: 24px;
+            }
+
+            .slide-caption p {
+                font-size: 14px;
+            }
+
+            .about-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">ZAKO</div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#service">Service</a></li>
+                <li><a href="#order">Order</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        
+        <!-- DIV 1: SLIDER (5 Gambar Otomatis) -->
+        <div class="slider-container" id="dashboard">
+            <div class="slider">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="foto/slide1.png" alt="Slide 1">
+                    <div class="slide-caption">
+                        <h2>Solusi Kasir Digital</h2>
+                        <p>Kelola bisnis Anda menjadi lebih mudah, cepat, dan terstruktur rapi.</p>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="foto/slide2.png" alt="Slide 2">
+                    <div class="slide-caption">
+                        <h2>Kelas Coding Terbimbing</h2>
+                        <p>Belajar programming dari nol bersama mentor berpengalaman.</p>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="foto/slide3.png" alt="Slide 3">
+                    <div class="slide-caption">
+                        <h2>Sistem Manajemen Gudang</h2>
+                        <p>Pantau stok produk Anda secara realtime tanpa takut selisih.</p>
+                    </div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="slide">
+                    <img src="foto/slide4.png" alt="Slide 4">
+                    <div class="slide-caption">
+                        <h2>Aplikasi Kasir Warung</h2>
+                        <p>Sederhana, ringan, cocok dijalankan di HP maupun perangkat komputer.</p>
+                    </div>
+                </div>
+                <!-- Slide 5 -->
+                <div class="slide">
+                    <img src="foto/slide5.png" alt="Slide 5">
+                    <div class="slide-caption">
+                        <h2>Konsultasi Database</h2>
+                        <p>Rancang dan optimalkan performa data bisnis skala besar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIV 2: ABOUT US -->
+        <div class="about-section reveal" id="about">
+            <h2>Tentang Kami</h2>
+            <p>Kasir Ku berkomitmen mendampingi digitalisasi bisnis Anda dan meningkatkan skill teknologi masa kini.</p>
+            <div class="about-grid">
+                <div class="about-card">
+                    <i class="fasfa-laptop-code"></i>
+                    <h3>Order Aplikasi Kasir</h3>
+                    <p>Kami melayani pembuatan aplikasi kasir kustom siap pakai yang disesuaikan dengan alur bisnis Anda, baik untuk toko ritel, cafe, restoran, maupun pergudangan logistik.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fasfa-graduation-cap"></i>
+                    <h3>Bimbingan Kelas Program</h3>
+                    <p>Menyediakan program bimbingan belajar programming dari tingkat dasar komputer hingga mahir pembuatan aplikasi berbasis web. Kurikulum praktis fokus pada proyek nyata.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIV 3: SERVICE (11 Cards Jasa/Produk) -->
+        <div class="service-section id-reveal" id="service">
+            <div class="service-container">
+                <h2>Layanan & Kelas Kami</h2>
+                <div class="grid-services">
+                    
+                    <!-- Card 1 -->
+                    <div class="card">
+                        <img src="foto/order1.png" alt="Dasar Komputer">
+                        <div class="card-content">
+                            <div class="card-title">Pengetahuan Dasar Komputer</div>
+                            <div class="card-desc">Belajar pengenalan hardware, operating system, dan trik operasional dasar komputer untuk pemula.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 1.000.000</span>
+                                <span class="price-new">Rp 500.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('Pengetahuan Dasar Komputer', 'Rp 150.000')">Order Kelas</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card">
+                        <img src="foto/order2.png" alt="HTML CSS">
+                        <div class="card-content">
+                            <div class="card-title">HTML & CSS</div>
+                            <div class="card-desc">Fondasi utama pembuatan website responsive. Belajar susun layout menarik modern.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 1.500.000</span>
+                                <span class="price-new">Rp 750.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('HTML & CSS', 'Rp 250.000')">Order Kelas</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card">
+                        <img src="foto/order3.png" alt="MS Office">
+                        <div class="card-content">
+                            <div class="card-title">Microsoft Office</div>
+                            <div class="card-desc">Kuasai Microsoft Word, PowerPoint, dan pengenalan dasar administrasi perkantoran.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 1.500.000</span>
+                                <span class="price-new">Rp 750.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('Microsoft Office', 'Rp 200.000')">Order Kelas</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="card">
+                        <img src="foto/order4.png" alt="Excel">
+                        <div class="card-content">
+                            <div class="card-title">Program Excel</div>
+                            <div class="card-desc">Pendalaman rumus VLOOKUP, HLOOKUP, Pivot Table, dan otomasi laporan keuangan.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 1.500.000</span>
+                                <span class="price-new">Rp 750.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('Program Excel', 'Rp 299.000')">Order Kelas</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="card">
+                        <img src="foto/order5.png" alt="HTML CSS PHP">
+                        <div class="card-content">
+                            <div class="card-title">HTML, CSS & PHP</div>
+                            <div class="card-desc">Integrasi desain web frontend dengan sistem backend PHP native untuk web dinamis.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 2.000.000</span>
+                                <span class="price-new">Rp 1.000.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('HTML, CSS & PHP', 'Rp 399.000')">Order Kelas</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="card">
+                        <img src="foto/order6.png" alt="Editing">
+                        <div class="card-content">
+                            <div class="card-title">Editing</div>
+                            <div class="card-desc">Belajar manipulasi grafis gambar dan dasar-dasar editing video komersial.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 3.000.000</span>
+                                <span class="price-new">Rp 1.000.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('Editing', 'Rp 249.000')">Order Kelas</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="card">
+                        <img src="foto/order7.png" alt="PHP Login">
+                        <div class="card-content">
+                            <div class="card-title">PHP Aplikasi dengan Login</div>
+                            <div class="card-desc">Pembuatan sistem multi-user login yang aman menggunakan enkripsi password Session PHP.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 3.500.000</span>
+                                <span class="price-new">Rp 1.500.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('PHP Aplikasi dengan Login', 'Rp 350.000')">Order Kelas</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="card">
+                        <img src="foto/order8.png" alt="Kasir Cafe">
+                        <div class="card-content">
+                            <div class="card-title">Aplikasi Kasir Cafe dan Resto</div>
+                            <div class="card-desc">Aplikasi kasir fitur cetak struk, manajemen meja, menu varian, dan report omset.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 3.500.000</span>
+                                <span class="price-new">Rp 1.890.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('Aplikasi Kasir Cafe dan Resto', 'Rp 1.750.000')">Order Aplikasi</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 9 -->
+                    <div class="card">
+                        <img src="foto/order9.png" alt="Kasir Warung">
+                        <div class="card-content">
+                            <div class="card-title">Aplikasi Kasir Warung & Toko</div>
+                            <div class="card-desc">Sistem kasir scan barcode, manajemen stok barang, hutang piutang, dan laba rugi bersih.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 2.500.000</span>
+                                <span class="price-new">Rp 1.200.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('Aplikasi Kasir Warung & Toko', 'Rp 1.200.000')">Order Aplikasi</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 10 -->
+                    <div class="card">
+                        <img src="foto/order10.png" alt="Pergudangan">
+                        <div class="card-content">
+                            <div class="card-title">Aplikasi Pergudangan</div>
+                            <div class="card-desc">Sistem pencatatan barang masuk, keluar, mutasi rak gudang, otomatisasi purchase order.</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 4.000.000</span>
+                                <span class="price-new">Rp 2.000.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('Aplikasi Pergudangan', 'Rp 2.000.000')">Order Aplikasi</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 11 -->
+                    <div class="card">
+                        <img src="foto/order11.png" alt="Database">
+                        <div class="card-content">
+                            <div class="card-title">Pendataan Database</div>
+                            <div class="card-desc">Jasa kustom skema MySQL/PostgreSQL, optimasi indexing query yang lambat (slow query).</div>
+                            <div class="card-price">
+                                <span class="price-old">Rp 1.500.000</span>
+                                <span class="price-new">Rp 750.000</span>
+                            </div>
+                            <button class="btn-order" onclick="openOrderModal('Pendataan Database', 'Rp 750.000')">Order Jasa</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- DIV 4: REVIEWS (10 Ulasan Bergerak Otomatis) -->
+        <div class="reviews-section reveal" id="order">
+            <h2>Ulasan Pelanggan</h2>
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    <!-- 10 Review Asli (Diulang 2x via JS / manual agar efek loop tidak putus) -->
+                    <div class="review-card">
+                        <p>"Aplikasi kasir kafenya sangat membantu, sekarang pembukuan jadi rapi."</p>
+                        <span>- Andi, Pemilik Cafe</span>
+                    </div>
+                    <div class="review-card">
+                        <p>"Belajar web di sini dari nol sampai paham dibimbing dengan sabar banget!"</p>
+                        <span>- Budi, Mahasiswa</span>
+                    </div>
+                    <div class="review-card">
+                        <p>"Program kasir toko kelontong saya mudah dipakai bahkan oleh karyawan baru."</p>
+                        <span>- Citra, Toko Sembako</span>
+                    </div>
+                    <div class="review-card">
+                        <p>"Materi Excel-nya aplikatif, langsung kepake di kantor buat bikin report keuangan."</p>
+                        <span>- Dewi, Admin Kantor</span>
+                    </div>
+                    <div class="review-card">
+                        <p>"Sistem gudang kustomnya minim bug dan performanya cepat sekali."</p>
+                        <span>- Eko, Manajer Logistik</span>
+                    </div>
+                    <div class="review-card">
+                        <p>"Harga bimbingannya sangat terjangkau dibanding kursus tempat lain."</p>
+                        <span>- Farhan, Freelancer</span>
+                    </div>
+                    <div class="review-card">
+                        <p>"Fitur struk otomatisnya lancar dihubungkan ke printer thermal bluetooth."</p>
+                        <span>- Gita, Resto Sambal</span>
+                    </div>
+                    <div class="review-card">
+                        <p>"Konsultasi databasenya mantap, query website kami jadi 10x lipat lebih kencang."</p>
+                        <span>- Hendra, IT Developer</span>
+                    </div>
+                    <div class="review-card">
+                        <p>"Penjelasan HTML CSS-nya sangat gampang dicerna anak SMK."</p>
+                        <span>- Indah, Siswi SMK</span>
+                    </div>
+                    <div class="review-card">
+                        <p>"Sangat puas dengan pelayanan aftersales aplikasi kasirnya, ramah pol."</p>
+                        <span>- Joko, Pengusaha Butik</span>
+                    </div>
+                    
+                    <!-- Duplikasi untuk Efek Infinite Scroll Sempurna -->
+                    <div class="review-card"><p>"Aplikasi kasir kafenya sangat membantu, sekarang pembukuan jadi rapi."</p><span>- Andi</span></div>
+                    <div class="review-card"><p>"Belajar web di sini dari nol sampai paham dibimbing dengan sabar!"</p><span>- Budi</span></div>
+                    <div class="review-card"><p>"Program kasir toko kelontong saya mudah dipakai bahkan oleh karyawan baru."</p><span>- Citra</span></div>
+                    <div class="review-card"><p>"Materi Excel-nya aplikatif, langsung kepake di kantor."</p><span>- Dewi</span></div>
+                    <div class="review-card"><p>"Sistem gudang kustomnya minim bug dan performanya cepat sekali."</p><span>- Eko</span></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Kasir Ku. All Rights Reserved.</p>
+        <p>Created by: Tim Kasir Ku</p>
+        <p>Telepon: +62 812-3456-7890 | Email: support@kasirku.com</p>
+    </footer>
+
+    <!-- POPUP / MODAL ORDER -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeOrderModal()">&times;</span>
+            <h3>Form Pemesanan</h3>
+            
+            <div class="form-group">
+                <label>Unit yang di Order</label>
+                <input type="text" id="orderUnit" readonly style="background: #eee;">
+            </div>
+            <div class="form-group">
+                <label>Harga</label>
+                <input type="text" id="orderPrice" readonly style="background: #eee;">
+            </div>
+            <div class="form-group">
+                <label>Nama Anda</label>
+                <input type="text" id="custName" placeholder="Masukkan nama lengkap">
+            </div>
+            <div class="form-group">
+                <label>Alamat</label>
+                <input type="text" id="custAddress" placeholder="Masukkan alamat lengkap">
+            </div>
+            <div class="form-group">
+                <label>Nomor Telepon</label>
+                <input type="tel" id="custPhone" placeholder="Contoh: 0812345678">
+            </div>
+
+            <button class="btn-rule-trigger" onclick="openRuleModal()">Lihat Peringatan Aturan Order</button>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="agreeCheckbox">
+                <label for="agreeCheckbox">Saya menyetujui aturan order yang telah dibaca maupun tidak dibaca.</label>
+            </div>
+
+            <button class="btn-checkout" onclick="processCheckout()">Checkout via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- SUB MODAL: ATURAN ORDER -->
+    <div class="rule-modal" id="ruleModal">
+        <div class="rule-content">
+            <h4>Peringatan Aturan Order</h4>
+            <br>
+            <p>Sebelum mengorder mohon untuk melakukan pembayaran uang muka sebesar 20% sebagai tanda terima, apabila customer sudah mengorder dan melakukan pembayaran namun tidak atau melakukan pembatalan sebelum terjadinya proses pengerjaan, maka uang muka akan dikembalikan sebesar 50%.</p>
+            <button class="btn-close-rule" onclick="closeRuleModal()">Paham & Tutup</button>
+        </div>
+    </div>
+
+    <!-- FLOATING CHAT HELP (POJOK KANAN BAWAH) -->
+    <div class="floating-help">
+        <div class="help-cards-container" id="helpCards">
+            <div class="help-header">Ingin tanyakan apa?</div>
+            
+            <!-- Link Chat Aplikasi -->
+            <a href="https://wa.me/6282279974478?text=permisi%20pak,%20saya%20ingin%20tanya%20seputar%20aplikasi" target="_blank" class="help-card">
+                <i class="fabfa-whatsapp"></i>
+                <div class="help-card-text">
+                    <h4>Tanya Aplikasi</h4>
+                    <p>Konsultasi sistem kasir kustom</p>
+                </div>
+            </a>
+
+            <!-- Link Chat Bimbel -->
+            <a href="https://wa.me/6282279974478?text=permisi%20pak,%20saya%20ingin%20tanya%20seputar%20bimbel" target="_blank" class="help-card">
+                <i class="fabfa-whatsapp"></i>
+                <div class="help-card-text">
+                    <h4>Tanya Bimbel</h4>
+                    <p>Info pendaftaran kelas program</p>
+                </div>
+            </a>
+        </div>
+        <div class="chat-logo" id="chatLogoBtn">
+            <i class="fasfa-comment-dots"></i>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- NOMOR WHATSAPP ANDA ---
+        const MY_WA_NUMBER = "6282279974478"; // Silakan ganti dengan nomor WA aktif Anda
+
+        // --- MOBILE MENU TOGGLE ---
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // --- AUTOMATIC SLIDER (DIV 1) ---
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slider.style.transform = `translateX(-${currentSlide * 20}%)`;
+        }
+        setInterval(nextSlide, 4000); // Berganti otomatis setiap 4 detik
+
+        // --- ANIMATION ON SCROLL EFFECT ---
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                let elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', revealElements);
+        // Panggil sekali di awal jika ada elemen yang langsung terlihat
+        revealElements();
+
+        // --- MODAL ORDER LOGIC (DIV 3) ---
+        const orderModal = document.getElementById('orderModal');
+        const ruleModal = document.getElementById('ruleModal');
+
+        function openOrderModal(unitName, price) {
+            document.getElementById('orderUnit').value = unitName;
+            document.getElementById('orderPrice').value = price;
+            orderModal.style.display = 'flex';
+        }
+
+        function closeOrderModal() {
+            orderModal.style.display = 'none';
+            // Reset fields
+            document.getElementById('custName').value = '';
+            document.getElementById('custAddress').value = '';
+            document.getElementById('custPhone').value = '';
+            document.getElementById('agreeCheckbox').checked = false;
+        }
+
+        function openRuleModal() {
+            ruleModal.style.display = 'flex';
+        }
+
+        function closeRuleModal() {
+            ruleModal.style.display = 'none';
+        }
+
+        // --- DETEKSI WAKTU REALTIME UNTUK SALUTASI WA ---
+        function getRealtimeGreeting() {
+            const hours = new Date().getHours();
+            if (hours >= 4 && hours < 11) return "pagi";
+            if (hours >= 11 && hours < 15) return "siang";
+            if (hours >= 15 && hours < 18) return "sore";
+            return "malam";
+        }
+
+        // --- CHECKOUT LOGIC ---
+        function processCheckout() {
+            const name = document.getElementById('custName').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const unit = document.getElementById('orderUnit').value;
+            const price = document.getElementById('orderPrice').value;
+            const isAgreed = document.getElementById('agreeCheckbox').checked;
+
+            if (!name || !address || !phone) {
+                alert("Mohon lengkapi semua data form pemesanan terlebih dahulu!");
+                return;
+            }
+
+            if (!isAgreed) {
+                alert("Anda harus mencentang persetujuan aturan order untuk melanjutkan!");
+                return;
+            }
+
+            const greeting = getRealtimeGreeting();
+            
+            // Generate format text sesuai permintaan user
+            const textMessage = `${greeting} pak, saya, ${name}, ${address}, ${phone}, ingin mengorder ${unit}, dengan harga ${price}, apakah bisa pak??`;
+            
+            // URL Encode text biar aman masuk ke WhatsApp link
+            const encodedText = encodeURIComponent(textMessage);
+            const waUrl = `https://wa.me/${MY_WA_NUMBER}?text=${encodedText}`;
+
+            // Alihkan ke WhatsApp
+            window.open(waUrl, '_blank');
+            closeOrderModal();
+        }
+
+        // --- FLOATING CHAT LOGO INTERACTION ---
+        const chatLogoBtn = document.getElementById('chatLogoBtn');
+        const helpCards = document.getElementById('helpCards');
+
+        chatLogoBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (helpCards.style.display === 'flex') {
+                helpCards.style.display = 'none';
+            } else {
+                helpCards.style.display = 'flex';
+            }
+        });
+
+        // Klik di area luar untuk menutup floating menu bantuan
+        document.addEventListener('click', () => {
+            helpCards.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
